@@ -47,25 +47,25 @@
                 <!-- Auth Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <!-- 
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <span class="logged-in-text">Logged in as <strong></strong></span>
+                            <span class="logged-in-text">Logged in as <strong>{{ user }}</strong></span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{% url 'logout' %}">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </a>
                         </li>
                         
-                        
+                        {% else %}
                         <li class="nav-item">
                             {% if request.path == '/login/' %}
                             <a class="nav-link" href="{% url 'register' %}">Register</a>
-                            
+                            {% else %}
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                             {% endif %}
                         </li>
-                        -->
+                        {% endif %}
                     </ul>
                 </div>
             </div>
