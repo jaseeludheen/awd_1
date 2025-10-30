@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'dataentry',
     'crispy_forms',
     'crispy_bootstrap5', 
+    'uploads',
+    'emails',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +133,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+
+# Media files configuration
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+
+
 # Crispy Forms configuration
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap5"]
+
+# brevo ( sendinblue ) email service configuration
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "SENDINBLUE_API_KEY": config('BREVO_API_KEY'),
+}
+
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+DEFAULT_TO_EMAIL = config('DEFAULT_TO_EMAIL')
