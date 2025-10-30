@@ -1,0 +1,91 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}Home - AWD{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <!-- Import Data -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 import">
+                    <div class="card-body">
+                        <h5 class="card-title">Import Data</h5>
+                        <p class="card-text">Imports data from CSV file to any table.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Export Data -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 export">
+                    <div class="card-body">
+                        <h5 class="card-title">Export Data</h5>
+                        <p class="card-text">Exports data from a specific table to a CSV file.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Bulk Emails -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 emails">
+                    <div class="card-body">
+                        <h5 class="card-title">Bulk Emails</h5>
+                        <p class="card-text">Sends bulk emails to users.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Email Tracking -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 emails">
+                    <div class="card-body">
+                        <h5 class="card-title">Email Tracking</h5>
+                        <p class="card-text">Tracks emails and shows open and click rate.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        
+        <!-- Compress Images -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 compress">
+                    <div class="card-body">
+                        <h5 class="card-title">Compress Images</h5>
+                        <p class="card-text">Compresses image files and reduces the size.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <!-- Stockmarket Analysis -->
+        <div class="col">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="card h-100 scraping">
+                    <div class="card-body">
+                        <h5 class="card-title">Stockmarket Analysis</h5>
+                        <p class="card-text">Stockmarket Analysis</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

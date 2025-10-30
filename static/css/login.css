@@ -1,0 +1,118 @@
+/* Login page container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+/* Login box */
+.form-box {
+    background-color: #1e2738; /* dark navy box */
+    max-width: 420px;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Title style */
+.form-box h2 {
+    color: #4ECDC4;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(78, 205, 196, 0.5);
+}
+
+/* Form field styles */
+.form-box label {
+    color: #C7D6D6;
+    font-weight: 500;
+}
+
+.form-box input {
+    background-color: #121826;
+    color: #e5e9e9;
+    border: 1px solid #2b3648;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-box input:focus {
+    border-color: #4ECDC4;
+    box-shadow: 0 0 8px rgba(78, 205, 196, 0.4);
+    outline: none;
+}
+
+/* Error message style */
+.error-message {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #FF6B6B;
+    border: 1px solid #FF6B6B;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Login button */
+.btn-muted {
+    background-color: #4ECDC4;
+    color: #0b101b;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-muted:hover {
+    background-color: #6BE6DE;
+    transform: translateY(-2px);
+}
+
+/* Register link */
+.text-center p {
+    color: #C7D6D6;
+}
+
+.text-center a {
+    color: #4ECDC4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.text-center a:hover {
+    color: #6BE6DE;
+    text-decoration: underline;
+}
+
+
+/* Hover effect for the form box */
+.form-box:hover {
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+
+
+/* Keep input color consistent even when focused or autofilled */
+.form-box input,
+.form-box input:focus,
+.form-box input:-webkit-autofill,
+.form-box input:-webkit-autofill:focus {
+    background-color: #121826 !important;
+    color: #e5e9e9 !important;
+    border: 1px solid #2b3648 !important;
+    -webkit-text-fill-color: #e5e9e9 !important;
+    box-shadow: 0 0 0px 1000px #121826 inset !important;
+    transition: background-color 0s ease-in-out 0s;
+}
+
+/* On hover, keep same color but highlight border */
+.form-box input:hover {
+    border-color: #4ECDC4;
+}

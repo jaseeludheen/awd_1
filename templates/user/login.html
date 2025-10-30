@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+
+<div class="container mt-5">
+    <div class="form-box">
+        <h2 class="text-center mb-4">Login</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="error-message">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+  
+            <div class="form-group">
+                {{ form|crispy }}
+            </div>
+            
+            <div class="text-center mt-3">
+                <button type="submit" value="Login" class="btn btn-muted">Login</button>
+            </div>
+
+        </form>
+        {% include 'alerts/alerts.html' %}
+    </div>
+</div>
+
+
+<div class="text-center mt-3">
+    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+</div>
+
+
+{% endblock %}
