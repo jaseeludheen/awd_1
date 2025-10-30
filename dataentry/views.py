@@ -7,7 +7,8 @@ from uploads.models import Upload
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.management import call_command
-from .utils import send_email_notification
+from .utils import send_email_notification, generate_csv_file
+
 
 
 
@@ -65,3 +66,52 @@ def import_data(request):
             'custom_models': custom_models,
         }
     return render(request, 'dataentry/importdata.html', context)
+
+
+
+
+
+def export_data(request):
+    if request.method == 'POST':
+        model_name = request.POST.get('model_name')
+
+        try :
+            # trigger call command
+            call_command('exportdata', model_name)
+        except Exception as e:
+                raise e
+        
+        file_path = generate_csv_file(model_name)
+    #    print('file_path==>', file_path)
+            
+        # send email with attachment
+        mail_subject = 'Export Data Successful'
+        message = 'Export Data Successful. Please find the Attachment'
+        to_email = settings.DEFAULT_TO_EMAIL
+        
+        
+
+        send_email_notification(mail_subject, message, [to_email], attachment=file_path)
+        
+
+        # show the message to the user
+        messages.success(request, 'Your data is being exported, You will be notified once it is done.')  # success message
+        return redirect('export_data')
+
+        """
+        try :
+            # trigger call command
+            call_command('exportdata', model_name)
+        except Exception as e:
+            raise e
+        
+        messages.success(request, 'Your data is exported')
+        return redirect('export_data')
+        """
+
+    else:
+        custom_models = get_all_custom_models() 
+        context = {
+            'custom_models': custom_models,
+        }
+    return render(request, 'dataentry/exportdata.html', context)

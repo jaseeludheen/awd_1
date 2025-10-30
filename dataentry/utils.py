@@ -5,6 +5,7 @@ from django.core.management.base import CommandError
 from django.db.utils import DataError
 from django.conf import settings
 from django.core.mail import EmailMessage
+import datetime
 
 
 
@@ -79,3 +80,19 @@ def send_email_notification(mail_subject, message, to_email, attachment=None):  
         mail.send()
     except Exception as e:
         raise e
+
+
+
+
+
+def generate_csv_file(model_name):
+    # generate the timestamp of current data and time
+    timestamp = datetime.datetime.now().strftime("%I:%M:%S%p_%d-%m-%Y")
+
+    export_dir = 'exported_data'
+    # define the CSV file name / path
+    file_name = f'exported_{model_name}_data_{timestamp}.csv'
+    file_path = os.path.join(settings.MEDIA_ROOT, export_dir, file_name) # 
+    print('file_path==>', file_path)
+
+    return file_path
