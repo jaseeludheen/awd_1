@@ -6,11 +6,11 @@ from .models import Subscriber, EmailTracking, Sent, Email
 from django.contrib import messages
 from .utils import send_email_notification
 from django.utils import timezone
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required(login_url='login')
 def send_email(request):
     if request.method == 'POST':
         email_form = EmailForm(request.POST, request.FILES)
@@ -101,7 +101,7 @@ def track_open(request, unique_id):
 
 
 
-
+@login_required(login_url='login')
 def track_dashboard(request):
 #   emails = Email.objects.all()
     emails = Email.objects.all().annotate(total_sent=Sum('sent__total_sent')).order_by('-sent_at') # ('sent__total_sent') sent is related name in Sent model, total_sent is field name in Sent model, totat_sent is the new field name for each email instance , order by decendind set_at

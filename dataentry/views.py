@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-
 from .utils import get_all_custom_models, check_csv_errors
 from django.conf import settings
 from uploads.models import Upload
@@ -8,10 +6,12 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.management import call_command
 from .utils import send_email_notification, generate_csv_file
+from django.contrib.auth.decorators import login_required
 
 
 
 
+@login_required(login_url='login')
 def import_data(request):
     if request.method == 'POST':
         file_path = request.FILES.get('file_path')    # FILES is used to handle file uploads in Django
@@ -71,6 +71,7 @@ def import_data(request):
 
 
 
+@login_required(login_url='login')
 def export_data(request):
     if request.method == 'POST':
         model_name = request.POST.get('model_name')

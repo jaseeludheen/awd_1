@@ -1,0 +1,44 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Stockmarket Analysis{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/stock_analysis.css' %}">
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+<div class="container mt-5">
+    <div class="form-box shadow-lg rounded">
+        <h2 class="text-center mb-4 text-glow">Stock Market Analysis</h2>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <form method="post" action="{% url 'stocks' %}">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                {{ form|crispy }}
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" value="Get Info" class="btn btn-custom">Get Info</button>
+            </div>
+        </form>
+
+        {% include 'alerts/alerts.html' %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        {{ form.media }}
+    </div>
+</div>
+
+
+
+{% endblock%}
