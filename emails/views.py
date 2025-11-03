@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect
+from django.db.models import Sum
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import EmailForm
-from .models import Subscriber
+from .models import Subscriber, EmailTracking, Sent, Email
 from django.contrib import messages
 from .utils import send_email_notification
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -54,3 +58,66 @@ def send_email(request):
             'email_form': email,
         }
         return render(request, 'emails/send-email.html', context)
+
+
+
+ 
+def track_click(request , unique_id):
+    # Logic to store the tracking info
+    print(request)
+    try:
+        email_tracking = EmailTracking.objects.get(unique_id=unique_id)
+        url = request.GET.get('url')
+        # check if thr clicked_at field is already set or not
+        if not email_tracking.clicked_at:
+            email_tracking.clicked_at = timezone.now()
+            email_tracking.save()
+            return HttpResponseRedirect(url)
+    except:
+        return HttpResponse("Email Tracking Record Not Found!")
+
+    
+
+
+
+def track_open(request, unique_id):
+    # Logic to store the tracking info
+    try:
+        email_tracking = EmailTracking.objects.get(unique_id=unique_id)
+        # check if thr opened_at field is already set or not
+        if not email_tracking.opened_at:
+            email_tracking.opened_at = timezone.now()
+            email_tracking.save()
+            return HttpResponse("Email Opened Successfully")
+        else:
+            return HttpResponse("Email Already Opened")
+    
+    except:
+        return HttpResponse("Email Tracking Record Not Found!")
+    
+        
+        
+
+
+
+
+
+def track_dashboard(request):
+#   emails = Email.objects.all()
+    emails = Email.objects.all().annotate(total_sent=Sum('sent__total_sent')).order_by('-sent_at') # ('sent__total_sent') sent is related name in Sent model, total_sent is field name in Sent model, totat_sent is the new field name for each email instance , order by decendind set_at
+    
+    context = {
+        'emails': emails,
+    }
+    return render(request, 'emails/track_dashboard.html', context)
+
+
+def track_stats(request, pk):
+    email = get_object_or_404(Email, pk=pk)
+    sent = Sent.objects.get(email=email)
+
+    context ={
+        'email': email,
+        'total_sent': sent.total_sent,
+    }
+    return render (request, 'emails/track_stats.html', context)
