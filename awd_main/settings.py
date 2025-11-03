@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-h-b@ovf18-p!b%kdte84&bop1-57(!x10)pbj4qao1sd09$%06
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5', 
     'uploads',
     'emails',
+    'ckeditor',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,19 @@ ANYMAIL = {
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 DEFAULT_TO_EMAIL = config('DEFAULT_TO_EMAIL')
+
+
+# CKEditor configuration
+CKEDITOR_CONFIGS = {
+    'default': {
+#       'toolbar': 'full',
+        'height': 200,
+#       'width': 300,
+    },
+}
+
+
+
+# BASE_URL configuration
+BASE_URL = config('BASE_URL') 
+CSRF_TRUSTED_ORIGINS = [config('CSRF_TRUSTED_ORIGINS')]  # add your ngrok url here

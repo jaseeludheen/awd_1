@@ -13,6 +13,8 @@ urlpatterns = [
     # Include the URLs from the dataentry app
     path('dataentry/', include('dataentry.urls')),
 
+    path('emails/', include('emails.urls')),
+
     
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),

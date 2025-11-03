@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %} Bulk Emails {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sent_email.css' %}">
+{% endblock %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+    <div class="container mt-5 p-3 shadow rounded" style="max-width: 600px;">
+        <h2 class="text-center mt-4">Compose an Email</h2>
+        <form action="{% url 'send_email' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ email_form | crispy }}
+            </div>
+            <div class="from-group">
+                <input type="submit" value="Send" class="btn btn-custom text-center">
+            </div>
+        </form>
+        {{ email_form.media }}
+        {% include 'alerts/alerts.html' %}
+    </div>
+
+
+{% endblock %}
+
+
