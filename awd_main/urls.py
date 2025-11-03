@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('emails/', include('emails.urls')),
 
+    path('image-compression/', include('image_compression.urls')),  
+
     
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
