@@ -11,7 +11,7 @@ import datetime
 
 
 def get_all_custom_models():
-    default_model = ['LogEntry', 'Permission', 'Group', 'ContentType', 'Session', 'User','Upload' ]
+    default_model = ['LogEntry', 'Permission', 'Group', 'ContentType', 'Session', 'User', 'Upload','Sent', 'EmailTracking', 'List','CompessImage', 'Subscriber',   ]
 
     # try to get all models 
     custom_models = []

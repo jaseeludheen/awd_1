@@ -144,6 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
@@ -180,3 +181,16 @@ CKEDITOR_CONFIGS = {
 # BASE_URL configuration
 BASE_URL = config('BASE_URL') 
 CSRF_TRUSTED_ORIGINS = [config('CSRF_TRUSTED_ORIGINS')]  # add your ngrok url here
+
+
+# Where to redirect users for login and after login
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+
+
+
+# Session expires after 15 minutes (900 seconds)
+SESSION_COOKIE_AGE = 900  # 15 * 60 seconds
+
+# Expire session when browser is closed (optional)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
